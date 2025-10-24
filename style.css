@@ -113,8 +113,8 @@ section{
 }
 
 .home-img{
-    width: 600px;
-    height: 600px;
+    width: 550px;
+    height: 550px;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid var(--main-color);
@@ -125,8 +125,8 @@ section{
     width: 100%;
     height: 100%;
     object-fit: cover; /* Prevent stretching image to fill container. */
-    object-position: -25px 0px; /* Adjust image position inside container (x y)*/
-    transform: scale(1.09);
+    object-position: 0px 5px; /* Adjust image position inside container (x y)*/
+    transform: scale(1.15);
 }
 
 .home-content h3{
@@ -150,7 +150,7 @@ span{
 
 .home-content p{
     font-size: 1.6rem;
-    margin-right: 3.4rem;
+    margin-right: 11rem;
 }
 
 .social-media a{
@@ -192,6 +192,7 @@ span{
 
 .portfolio{
     background: var(--second-bg-color);
+    padding: 10rem 9% 5rem; /* Prevent items from touching when decreasing resolution. */
 }
 
 .portfolio h2{
@@ -202,7 +203,9 @@ span{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    gap: 2.5rem;
+    gap: 3rem;
+    overflow-x: auto; /* Enable horizontal scroll before overflowing. */
+    padding-bottom: 3rem; /* Make space for the scrollbar. */
 }
 
 .portfolio-container .portfolio-box{
@@ -212,6 +215,7 @@ span{
     overflow: hidden;
     display: flex;
     aspect-ratio: 4 / 3;
+  min-height: 250px; /* Prevent collapsing height when grid changes. */
 }
 
 .portfolio-box img{
@@ -238,10 +242,12 @@ span{
     padding: 0 4rem;
     transform: translateY(100%);
     transition: .5s ease;
+    opacity: 0; /* Ensure layer starts fully hidden. */
 }
 
 .portfolio-box:hover .portfolio-layer{
     transform: translateY(0);
+    opacity: 1;
 }
 
 .portfolio-layer h4{
@@ -283,7 +289,7 @@ span{
 }
 
 .services-container .services-box{
-    flex: 1 1 30rem;
+    flex: 1 1 28rem; /* Make all boxes 28 rem. */
     background: var(--bg-color);
     padding: 3rem 2rem 4rem;
     border-radius: 2rem;
@@ -293,7 +299,6 @@ span{
     border-bottom: .6rem solid var(--main-color);
     /* border: .2rem solid var(--bg-color); */
     transition: .5s ease;
-
     display: flex;
     flex-direction: column; /* stack children vertically */
 }
@@ -359,21 +364,40 @@ span{
     color: var(--second-bg-color);
 }
 
+@media (max-width: 1250px){
+    .portfolio-container{
+        grid-template-columns: repeat(2, 1fr); /* Make two columns. */
+    }
+
+    .home-img{
+        width: 500px;
+        height: 500px;
+    }
+}
 
 @media (max-width: 1200px){
     html{
         font-size: 55%;
     }
+
+    .home-img{
+        width: 450px;
+        height: 450px;
+    }
 }
 
-
-@media (max-width: 991px){
+@media (max-width: 1000px){
     .header{
         padding: 2rem 3%;
     }
 
     section{
         padding: 10rem 3% 2rem;
+    }
+
+    .home-img{
+        width: 400px;
+        height: 400px;
     }
 
     .services{
@@ -389,8 +413,7 @@ span{
     }
 }
 
-
-@media (max-width: 768px){
+@media (max-width: 870px) {
     #menu-icon{
         display: block;
     }
@@ -429,57 +452,42 @@ span{
         font-size: 5rem;
     }
 
-    .home-img img{
-        width: 70wv;
-        margin-top: 4rem;
+    .home-img{
+        margin-top: 6rem;
+        width: 450px;
+        height: 450px;
     }
 
-    .about{
-        flex-direction: column-reverse;
-    }
-
-    .about img{
-        width: 70wv;
-        margin-top: 4rem;
-    }
-
-    .services h2{
-        margin-bottom: 3rem;
+    .portfolio-container {
+        grid-template-columns: 1fr; /* Make one column. */
     }
 
     .portfolio h2{
         margin-bottom: 3rem;
     }
 
-    .portfolio-container{
-        grid-template-columns: repeat(2, 1fr);
+    .services-container .services-box {
+        flex: 1 1 calc(50% - 2rem); /* Make each paired box half the row width, besides the gap. */
+    }
+
+    .services-container .services-box:nth-child(3) {
+        flex-basis: 100%; /* Make unpaired box fill entire row. */
+        max-width: 100%;
+    }
+
+    .services h2{
+        margin-bottom: 3rem;
     }
 }
 
-
-@media (max-width: 617px){
-    .portfolio-container{
-        grid-template-columns: 1fr;
+@media (max-width: 570px){
+    .home-img{
+        width: 350px;
+        height: 350px;
     }
 }
 
-
-@media (max-width: 450px){
-    html{
-        font-size: 50%;
-    }
-}
-
-
-@media (max-width: 365px){
-    .home-img img{
-        width: 90vw;
-    }
-
-    .about-img img{
-        width: 90vw;
-    }
-
+@media (max-width: 500px){
     .footer{
         flex-direction: column-reverse;
     }
@@ -488,4 +496,30 @@ span{
         text-align: center;
         margin-top: 2rem;
     }
+}
+
+@media (max-width: 440px){
+    html{
+        font-size: 50%;
+    }
+
+    /* Reduce horizontal paddings. */
+    section {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .home-img{
+        width: 300px;
+        height: 300px;
+    }
+
+    .services-container .services-box {
+        flex-basis: 100%; /* Make one column. */
+        max-width: 100%;
+    }
+}
+
+html, body {
+  overflow-x: hidden; /* Prevent horizontal overflow on small resolutions. */
 }
